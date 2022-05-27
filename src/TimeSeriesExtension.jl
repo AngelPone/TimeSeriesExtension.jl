@@ -4,6 +4,6 @@ include("utils.jl")
 include("equalds.jl")
 include("timevector.jl")
 
-export EqualPeriodDS, meta, TimeVector, freq, timestamp
+export EqualPeriodDS, meta, TimeVector, freq, timestamp, colnames
 
 end # module

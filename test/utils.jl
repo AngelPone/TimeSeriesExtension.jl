@@ -8,3 +8,5 @@ using TimeSeriesExtension: monthdiff
     @test monthdiff(Date(2020), Date(2021)) == Month(12)
     @test monthdiff(Date(2020), Date(2020, 2)) == Month(1) 
 end
+
+end

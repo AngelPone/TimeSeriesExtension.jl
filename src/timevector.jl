@@ -20,7 +20,7 @@ const TimeVector{T, D, A} = TimeArray{T,1,D,A} where {T,D<:TimeType,A<:AbstractV
     TimeVector(timestamp::T, ts::D, name::Symbol[], meta::TSMeta; unchecked=false)
     TimeVector(timestamp::T, ts::D, name::Symbol, freq::Int, meta::Any=nothing; unchecked=false)
     TimeVector(tv::TimeVector; timestamp::T=timestamp(tv), ts::D=values(tv), name::Symbol=names(tv)[1], freq=freq(tv), meta=meta(tv), unchecked=false)
-    TimeVector(data::NamedTuple; timestamp::Symbol, name::Symbol, freq::Int, meta::Any; unchecked=false)
+    TimeVector(data::NamedTuple; timestamp::Symbol, ts::Symbol, freq::Int, meta::Any; unchecked=false)
 
 - The first constructor is used to be compatible with `TimeSeries.TimeArray`. You may hardly use it.
 - The third constructor will update `tv` according to new `timestamp`, `ts`, `name` and `freq`.
@@ -50,7 +50,6 @@ julia> tv = TimeVector(ds, ts, :y, 12)
 │ ⋮          │ ⋮     │
 │ 2020-04-09 │ 99    │
 │ 2020-04-10 │ 100   │
-
 ```
 """
 function TimeVector(ds::AbstractVector{D}, ts::AbstractVector{T}, names::Vector{Symbol}, meta::TSMeta=nothing; unchecked=false) where {T, D<:TimeType}
@@ -72,8 +71,8 @@ TimeVector(tv::TimeVector{T, D, A};
     TimeVector(timestamp, values, [name], TSMeta([freq], meta); args...)
 
 
-function TimeVector(data::NamedTuple; timestamp::Symbol, name::Symbol, freq::Int=1, meta = nothing, args...)
-    TimeVector(data[timestamp], data[name], [name], TSMeta([freq], meta); args...)
+function TimeVector(data::NamedTuple; timestamp::Symbol, ts::Symbol, freq::Int=1, meta = nothing, args...)
+    TimeVector(data[timestamp], data[ts], [ts], TSMeta([freq], meta); args...)
 end
 
 function freq(ts::TimeArray)
