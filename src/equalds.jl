@@ -6,31 +6,6 @@ using Dates
 
 Timestamps with equal period.
 
-
-### Index
-
-```julia-repl
-julia>ds = EqualPeriodDS(Day(1), Date(2020), 10)
-EqualPeriodDS(period=1 day, start=2020-01-01, length=10) end at 2020-01-10
-julia>size(ds)
-10
-julia>ds[2]
-2020-01-02
-julia>ds[1:7]
-EqualPeriodDS(period=1 day, start=2020-01-01, length=7) end at 2020-01-07
-```
-
-You can also access elements out of the index range.
-
-```julia-repl
-julia>ds[11]
-2020-01-11
-julia>ds[11:20]
-EqualPeriodDS(period=1 day, start=2020-01-11, length=10) end at 2020-01-20
-julia>ds[0]
-2019-12-31
-```
-
 """
 struct EqualPeriodDS{U <: TimeType, T <: Period} <: AbstractArray{U, 1}
     period:: T
