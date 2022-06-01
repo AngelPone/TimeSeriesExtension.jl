@@ -5,4 +5,5 @@ makedocs(sitename="TimeSeriesExtension.jl",
              "TimeSeriesExtension OverView" => "index.md"
              "EqualPeriodDS" => "equalperiodds.md"
              "TimeVector" => "timevector.md"
+             "Utilities" => "utils.md"
          ])
